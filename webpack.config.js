@@ -46,7 +46,7 @@ module.exports = {
                         loader: "postcss-loader",
                         options: {
                             postcssOptions: {
-                                puglin: [
+                                plugin: [
                                     "postcss-preset-env",
                                     {
                                         browers: "last 2 versions"
