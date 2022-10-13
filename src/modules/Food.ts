@@ -1,6 +1,6 @@
 class Food {
     //定义一个元素表示食物对应的元素
-    element: HTMLElement;
+    element: HTMLElement
 
     constructor() {
         //获取页面中的食物元素

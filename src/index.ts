@@ -2,11 +2,12 @@
 import './index.less'
 
 //引入类
-import Food from './modules/Food'
-import ScorePanel from "./modules/ScorePanel";
+import GameControl from "./modules/GameControl";
 
-const food = new Food()
-food.change()
-const panel = new ScorePanel()
-panel.addScore()
-panel.addScore()
+const gameControl = new GameControl()
+//测试的代码
+// const food = new Food()
+// food.change()
+// const panel = new ScorePanel()
+// panel.addScore()
+// panel.addScore()
