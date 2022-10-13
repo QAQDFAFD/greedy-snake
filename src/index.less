@@ -1,3 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@bg-color: #b7d4a8;
+
 body {
-  background-color: skyblue;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: bold 20px "Courier New";
+}
+
+#main {
+  width: 360px;
+  height: 420px;
+  background-color: @bg-color;
+  border: 10px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  #stage {
+    width: 304px;
+    height: 304px;
+    border: 2px solid black;
+    //参照物是舞台
+    position: relative;
+
+    .snake {
+      > div {
+        width: 10px;
+        height: 10px;
+        background-color: #000;
+        border: 1px solid transparent;
+        position: absolute;
+      }
+    }
+
+    .food {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      left: 10px;
+      top: 100px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+
+      > div {
+        width: 4px;
+        height: 4px;
+        background-color: #000;
+        transform: rotate(45deg);
+      }
+    }
+
+
+  }
+
+  #score-panel {
+    width: 304px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
 }
