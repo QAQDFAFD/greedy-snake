@@ -60,8 +60,6 @@ class GameControl {
             this.snake.addBody()
         }
 
-        // this.snake.moveBody()
-        
         try {
             this.snake.X = X
             this.snake.Y = Y

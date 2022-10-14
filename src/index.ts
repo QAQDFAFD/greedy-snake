@@ -5,9 +5,3 @@ import './index.less'
 import GameControl from "./modules/GameControl";
 
 const gameControl = new GameControl()
-//测试的代码
-// const food = new Food()
-// food.change()
-// const panel = new ScorePanel()
-// panel.addScore()
-// panel.addScore()

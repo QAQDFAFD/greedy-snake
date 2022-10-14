@@ -4,7 +4,6 @@ class Snake {
     //获取蛇的容器
     element: HTMLElement
 
-
     constructor() {
         this.element = document.querySelector('.snake')!
         this.headElement = document.querySelector('.snake > div')!
@@ -24,18 +23,20 @@ class Snake {
         if (this.X === value) return
         if (value < 0 || value > 290)
             throw new Error('蛇撞墙了')
-        console.log(this.body[1] && (this.body[1] as HTMLElement).offsetLeft === value)
         if (this.body[1] && (this.body[1] as HTMLElement).offsetLeft === value) {
             console.log('请勿水平掉头')
-            if (value > this.X)
+            if (value > this.X) {
                 value = this.X - 10
-            if (value < this.X)
+            } else {
                 value = this.X + 10
+            }
+
+
         }
-        this.checkHead()
+
         this.moveBody()
         this.headElement.style.left = `${value}px`
-
+        this.checkHead()
     }
 
     set Y(value: number) {
@@ -44,15 +45,15 @@ class Snake {
             throw new Error('蛇撞墙了,Game Over')
         if (this.body[1] && (this.body[1] as HTMLElement).offsetTop === value) {
             console.log('请勿垂直掉头')
-            if (value > this.Y)
+            if (value > this.Y) {
                 value = this.Y - 10
-            if (value < this.Y)
+            } else {
                 value = this.Y + 10
+            }
         }
-        this.checkHead()
         this.moveBody()
         this.headElement.style.top = `${value}px`
-
+        this.checkHead()
     }
 
     addBody() {
@@ -74,6 +75,8 @@ class Snake {
         //获取所有的身体坐标，判断是否重叠
         for (let i = 1; i < this.body.length; i++) {
             let bd = this.body[i] as HTMLElement
+            // console.log(this.X, this.Y)
+            // console.log(`第${i}个元素`, bd.offsetLeft, bd.offsetTop)
             if (this.X === bd.offsetLeft && this.Y === bd.offsetTop) {
                 throw new Error('TM撞到自己了')
             }
