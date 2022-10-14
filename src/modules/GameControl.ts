@@ -30,7 +30,7 @@ class GameControl {
     keydownHandler(e: KeyboardEvent) {
         //检查 key 的值是不是合法的
         this.direction = e.key
-        console.log(this.direction)
+        // console.log(this.direction)
     }
 
     //创建蛇移动的方法
@@ -52,6 +52,7 @@ class GameControl {
                 break
         }
 
+
         if (this.checkEat(X, Y)) {
             console.log('吃到了食物')
             this.food.change()
@@ -59,6 +60,8 @@ class GameControl {
             this.snake.addBody()
         }
 
+        // this.snake.moveBody()
+        
         try {
             this.snake.X = X
             this.snake.Y = Y
@@ -69,7 +72,9 @@ class GameControl {
 
 
         //定时调用
-        this.isLive && setTimeout(this.run.bind(this), 300 - (this.scorePanel.level - 1) * 30)
+        this.isLive && setTimeout(() => this.run(),
+            300 - (this.scorePanel.level - 1) * 30)
+
     }
 
 

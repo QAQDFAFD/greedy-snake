@@ -1,7 +1,7 @@
 //定义计分牌类
 class ScorePanel {
     score = 0
-    level = 1
+    level = 0
     scoreEle: HTMLElement
     levelEle: HTMLElement
     //最高的等级
@@ -20,13 +20,16 @@ class ScorePanel {
     addScore() {
         this.score++
         this.scoreEle.innerHTML = `${this.score}`
-        if (this.score % this.upScore === 0) this.level++
+        if (this.score % this.upScore === 0)
+            this.level++
+        this.levelUp()
     }
 
     //等级提升
     levelUp() {
         if (this.level < this.maxLevel)
             this.levelEle.innerHTML = `${this.level}`
+
     }
 }
 

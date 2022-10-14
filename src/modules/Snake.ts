@@ -1,6 +1,6 @@
 class Snake {
     headElement: HTMLElement
-    body: NodeListOf<Element>
+    body: HTMLCollection
     //获取蛇的容器
     element: HTMLElement
 
@@ -8,7 +8,8 @@ class Snake {
     constructor() {
         this.element = document.querySelector('.snake')!
         this.headElement = document.querySelector('.snake > div')!
-        this.body = document.querySelectorAll('.snake > div')!
+        this.body = document.getElementsByClassName('snake-body')!
+        console.log(this.body.length)
     }
 
     get X() {
@@ -23,6 +24,16 @@ class Snake {
         if (this.X === value) return
         if (value < 0 || value > 290)
             throw new Error('蛇撞墙了')
+        console.log(this.body[1] && (this.body[1] as HTMLElement).offsetLeft === value)
+        if (this.body[1] && (this.body[1] as HTMLElement).offsetLeft === value) {
+            console.log('请勿水平掉头')
+            if (value > this.X)
+                value = this.X - 10
+            if (value < this.X)
+                value = this.X + 10
+        }
+        this.checkHead()
+        this.moveBody()
         this.headElement.style.left = `${value}px`
 
     }
@@ -31,13 +42,43 @@ class Snake {
         if (this.Y === value) return
         if (value < 0 || value > 290)
             throw new Error('蛇撞墙了,Game Over')
+        if (this.body[1] && (this.body[1] as HTMLElement).offsetTop === value) {
+            console.log('请勿垂直掉头')
+            if (value > this.Y)
+                value = this.Y - 10
+            if (value < this.Y)
+                value = this.Y + 10
+        }
+        this.checkHead()
+        this.moveBody()
         this.headElement.style.top = `${value}px`
+
     }
 
     addBody() {
-        this.element.insertAdjacentHTML('beforeend', '<div></div>')
+        this.element.insertAdjacentHTML('beforeend', '<div class="snake-body"></div>')
     }
 
+    //添加一个蛇身体移动的方法
+    moveBody() {
+        for (let i = this.body.length - 1; i > 0; i--) {
+            let x = (this.body[i - 1] as HTMLElement).offsetLeft
+            let y = (this.body[i - 1] as HTMLElement).offsetTop
+                // console.log(`这是蛇身体的倒数第${i}个小块`, x, y)
+            ;(this.body[i] as HTMLElement).style.left = `${x}px`
+            ;(this.body[i] as HTMLElement).style.top = `${y}px`
+        }
+    }
+
+    checkHead() {
+        //获取所有的身体坐标，判断是否重叠
+        for (let i = 1; i < this.body.length; i++) {
+            let bd = this.body[i] as HTMLElement
+            if (this.X === bd.offsetLeft && this.Y === bd.offsetTop) {
+                throw new Error('TM撞到自己了')
+            }
+        }
+    }
 }
 
 export default Snake
